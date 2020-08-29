@@ -8,6 +8,7 @@ class Abstract_Module
 public:
     Abstract_Module();
 
+    void    addItem();
     // getter
     database::Database getDatabase() const;
 

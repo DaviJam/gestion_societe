@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,19 +16,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    IHM/widgetfilldata.cpp \
     abstract_module.cpp \
     database.cpp \
+    IHM/interface.cpp \
     main.cpp \
-    mainwindow.cpp
+    IHM/mainwindow.cpp \
+    IHM/widgetrecettedepense.cpp \
+    module.cpp
 
 HEADERS += \
+    Common.h \
+    IHM/widgetfilldata.h \
     abstract_module.h \
     database.h \
-    mainwindow.h
+    IHM/interface.h \
+    IHM/mainwindow.h \
+    IHM/widgetrecettedepense.h \
+    module.h
 
 FORMS += \
-    interface.ui \
-    mainwindow.ui
+    IHM/interface.ui \
+    IHM/mainwindow.ui \
+    IHM/widgetfilldata.ui \
+    IHM/widgetrecettedepense.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

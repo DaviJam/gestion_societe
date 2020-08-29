@@ -1,9 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "widgetrecettedepense.h"
 #include <QDate>
 #include <QString>
+#include <QTableView>
+#include <QPushButton>
 #include <QDebug>
-
+#define NB_MONTHS 12
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -13,18 +16,25 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label->setFont(serifFont);
     ui->label->setText(QString("Année %1").arg(QString::number(QDate::currentDate().year())));
     ui->label->setScaledContents(true);
-    for(int i = 0; i < 12; i++)
+    for(int i = 0; i < NB_MONTHS; i++)
     {
-        QWidget* widget = new QWidget(ui->tabWidget);
-        m_tabWidgetList << widget;
+        WidgetRecetteDepense* widget = new WidgetRecetteDepense(ui->tabWidget);
+        QList<QObject*> list;
+        list << widget;
+        m_objectList << list;
+        widget->adjustSize();
         ui->tabWidget->addTab(widget, QDate(2000,i+1,1).toString("MMMM"));
-        //ui->tabWidget->setTabText(i, QDate(2000,i+1,1).toString("MMMM"));
+        ui->tabWidget->currentWidget()->adjustSize();
+
     }
 }
 
 MainWindow::~MainWindow()
 {
-    m_tabWidgetList.clear();
+    for(auto* item : *m_objectList.data())
+    {
+        item->deleteLater();
+    }
+    m_objectList.clear();
     delete ui;
 }
-

@@ -5,22 +5,16 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlRecord>
 #include <QtSql/QSqlTableModel>
+#include <QDate>
+#include "Common.h"
 
 namespace database{
-
-namespace table{
-
-    typedef enum{
-        RECETTE = 0,
-        DEPENSE
-}table_s;
-};//namespace table
 
 class Database
 {
 public:
     Database();
-    static void add_to_database(table::table_s ai_dataType);
+    static void add_to_database(table::table_s ai_table, data_type::data_type_s data);
 
 private:
     QSqlDatabase m_database;
